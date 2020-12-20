@@ -78,7 +78,7 @@ a {
         }
         &:nth-child(2) {
           font-size: 50px;
-          padding-left: 4px; // Align text
+          padding-left: 4px; // Align text left side
         }
       }
     }
@@ -120,7 +120,7 @@ a {
   user-select: none;
 
   position: absolute;
-  bottom: 0px;
+  bottom: 20px;
   left: calc(100% - (#{$emoji-font-size}));
   z-index: -3;
 }

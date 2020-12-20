@@ -1,5 +1,16 @@
-{{ partial "header/styles.html" . }}
+<head>
+  {{ $mainCss := resources.Get "scss/main.scss" | toCSS (dict "outputStyle" "compressed") | fingerprint }}
+  <link rel="stylesheet" href="{{ $mainCss.RelPermalink }}" integrity="{{ $mainCss.Data.Integrity }}">
 
+  {{ $mainJs := resources.Get "js/main.js" | js.Build "main.js" | minify | fingerprint }}
+  <script src="{{ $mainJs.RelPermalink }}" integrity="{{ $mainJs.Data.Integrity }}"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap" rel="stylesheet">
+</head>
+
+<body>
 <div class="section one">
   <div class="portrait">{{ partial "prisma_portrait_round_crop.svg" . }}</div>
   <div class="salutation font-weight-600">
@@ -18,7 +29,6 @@
     I’ve been at CrowdAI, Stripe, Twitch, Facebook, and UC Berkeley
   </div>
 </div>
-<!-- <img src="https://mightyapp.com/img/swoosh.jpg" /> -->
 <div class="section three">
   <div><span class="text-accent font-weight-600">But that’s no fun.</span> So here’s a button that shoots emojis</div>
   <div class="spacer"></div>
@@ -40,3 +50,4 @@
   <!-- <div><a target="_blank" href="https://www.linkedin.com/in/aleks-kamko/">LinkedIn →</a></div> -->
   <div><a href="mailto:aykamko@gmail.com">aykamko@gmail.com</a></div>
 </div>
+</body>

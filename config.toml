@@ -1,6 +1,3 @@
 baseURL = "http://alekskamko.com/"
 languageCode = "en-us"
 title = "Aleks Kamko"
-
-[params]
-  customCss = ["scss/reset.scss", "scss/main.scss"]

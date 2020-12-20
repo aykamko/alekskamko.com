@@ -1,3 +1,6 @@
-baseURL = "http://example.org/"
+baseURL = "http://alekskamko.com/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Aleks Kamko"
+
+[params]
+  customCss = ["scss/main.scss"]

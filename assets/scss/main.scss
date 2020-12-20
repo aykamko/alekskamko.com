@@ -1,18 +1,127 @@
+$body-background: rgb(51, 51, 51);
+$link-color: #000ee6;
+$white-text: #fefefe;
+$black-text: #111;
+$section-1: #b5deff;
+$section-2: #8690b8;
+$section-3: #d3dcff;
+$section-4: #edf0ff;
+
 $button-top-color: #5f37ff;
 $button-base-color: #7155ff;
-$circle-width: 126px;
-$circle-height: 100px;
-$pipe-height: 35px;
+$button-transition-time: 50ms;
+$circle-perspective-ratio: 60 / 90;
+$circle-width: 225px;
+$circle-height: $circle-width * $circle-perspective-ratio;
+$pipe-height: 55px;
 $pit-width: 6px;
-$emoji-font-size: 50px;
+$emoji-font-size: 70px;
+$button-text-height: 4;
+
+$body-width: 1450px;
+$content-width: 850px;
+$content-vert-padding: 120px;
+$content-horiz-padding: ($body-width - $content-width) / 2;
+
+body {
+  background-color: $body-background;
+  color: $black-text;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+
+  max-width: 1500px;
+  margin: auto;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  font-weight: 600;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.font-weight-600 {
+  font-weight: 600;
+}
+
+.text-accent {
+  color: $button-top-color;
+}
+
+.spacer {
+  height: $content-vert-padding / 2;
+}
+
+.section {
+  position: relative;
+  padding: $content-vert-padding $content-horiz-padding $content-vert-padding
+    $content-horiz-padding;
+  contain: content; // Necessary for z-index of button to work
+
+  &.one {
+    background-color: $section-1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .salutation {
+      margin-left: 50px;
+      > div {
+        &:nth-child(1) {
+          font-size: 100px;
+        }
+        &:nth-child(2) {
+          font-size: 50px;
+          padding-left: 4px; // Align text
+        }
+      }
+    }
+  }
+  &.two {
+    background-color: $section-2;
+    color: $white-text;
+
+    display: flex;
+    justify-content: center;
+    > div {
+      flex: 1 1;
+      text-align: justify;
+      &:not(:first-child) {
+        margin-left: $content-vert-padding;
+      }
+    }
+  }
+  &.three {
+    background-color: $section-3;
+  }
+  &.four {
+    background-color: $section-4;
+  }
+}
+
+.portrait {
+  width: 340px;
+  height: 340px;
+  > svg {
+    height: 100%;
+  }
+}
+
+// Emoji stuff
 
 .generated-emoji {
   font-size: $emoji-font-size;
   user-select: none;
 
   position: absolute;
-  left: calc(50% - (#{$emoji-font-size} / 2));
-  top: calc(50% - (#{$emoji-font-size} / 2));
+  bottom: 0px;
+  left: calc(100% - (#{$emoji-font-size}));
   z-index: -3;
 }
 
@@ -22,8 +131,6 @@ $emoji-font-size: 50px;
 }
 
 .emoji-button {
-  margin: 10px; // TODO: remove, use only padding
-
   border: none;
   background-color: transparent;
   position: relative;
@@ -37,8 +144,15 @@ $emoji-font-size: 50px;
     position: relative;
   }
 
-  .circle {
+  .button-text {
+    transform: rotate3d(1, 0, 0, #{(1 - $circle-perspective-ratio) * 90}deg);
+    text-shadow: 0px 1px black, 0px 2px black, 0px 3px black, 0px 4px black;
+    padding-bottom: 8px;
+    font-size: 36px;
     color: white;
+  }
+
+  .circle {
     width: $circle-width;
     height: $circle-height;
     border-radius: 50%;
@@ -50,6 +164,10 @@ $emoji-font-size: 50px;
     align-items: center;
     justify-content: center;
     background-color: $button-top-color;
+
+    top: 0;
+    transition: all $button-transition-time;
+    font-family: "Source Code Pro", monospace;
   }
 
   .pipe {
@@ -58,7 +176,8 @@ $emoji-font-size: 50px;
     background-color: $button-base-color;
 
     position: absolute;
-    top: $pipe-height / 2;
+    top: calc(50% - #{$pipe-height});
+    transition: all $button-transition-time;
   }
 
   .pit {
@@ -83,7 +202,7 @@ $emoji-font-size: 50px;
       top: $pipe-height / 2;
     }
     .pipe {
-      top: $pipe-height;
+      top: calc(50% - #{$pipe-height / 2});
       height: $pipe-height / 2;
     }
   }

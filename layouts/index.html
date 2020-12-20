@@ -1,18 +1,30 @@
 {{ partial "header/styles.html" . }}
 
-<div class="section1">
-  <div>Hi!</div>
-  <div>I'm Aleks Kamko.</div>
+<div class="section one">
+  <div class="portrait">{{ partial "prisma_portrait_round_crop.svg" . }}</div>
+  <div class="salutation font-weight-600">
+    <div>Hi!</div>
+    <div>I'm Aleks Kamko</div>
+  </div>
 </div>
-<div class="section2">
-  <div>I’m a developer who likes elegant systems, great user experiences, remote work, and startups.</div>
-  <div>These days, I’m building a piece of the future at Mighty. Previously, I’ve been at CrowdAI, Stripe, Twitch, and Facebook.</div>
+<div class="section two white-text">
+  <div>
+    I’m a <strike>software engineer</strike> silicon wizard who enjoys system
+    design, great user experiences, remote work culture, and dropping the
+    trailing period
+  </div>
+  <div>
+    These days, I’m building a piece of the future at <a target="_blank" href="https://mightyapp.com/">Mighty</a>. Previously,
+    I’ve been at CrowdAI, Stripe, Twitch, Facebook, and UC Berkeley
+  </div>
 </div>
-<div class="section3">
-  <div><span>But that’s no fun.</span> So here’s a button that shoots emojis.</div>
+<!-- <img src="https://mightyapp.com/img/swoosh.jpg" /> -->
+<div class="section three">
+  <div><span class="text-accent font-weight-600">But that’s no fun.</span> So here’s a button that shoots emojis</div>
+  <div class="spacer"></div>
   <div class="emoji-button-container">
     <button class="emoji-button">
-      <div class="top circle">FUN</div>
+      <div class="top circle"><div class="button-text">&lt;FUN/&gt;</div></div>
       <div class="base circle">
         <div class="pipe"></div>
       </div>
@@ -20,6 +32,11 @@
     </button>
   </div>
 </div>
-<div class="section4"></div>
-<div class="section5"></div>
-
+<div class="section four">
+  <div>You can find me on the internet at these places</div>
+  <div class="spacer"></div>
+  <div><a target="_blank" href="https://github.com/aykamko">Github</a></div>
+  <!-- <div><a target="_blank" href="https://twitter.com/alekskamko">Twitter →</a></div> -->
+  <!-- <div><a target="_blank" href="https://www.linkedin.com/in/aleks-kamko/">LinkedIn →</a></div> -->
+  <div><a href="mailto:aykamko@gmail.com">aykamko@gmail.com</a></div>
+</div>

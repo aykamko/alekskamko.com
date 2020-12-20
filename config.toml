@@ -3,4 +3,4 @@ languageCode = "en-us"
 title = "Aleks Kamko"
 
 [params]
-  customCss = ["scss/main.scss"]
+  customCss = ["scss/reset.scss", "scss/main.scss"]

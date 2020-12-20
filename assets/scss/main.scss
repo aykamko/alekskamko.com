@@ -1,3 +1,90 @@
+$button-top-color: #5f37ff;
+$button-base-color: #7155ff;
+$circle-width: 126px;
+$circle-height: 100px;
+$pipe-height: 35px;
+$pit-width: 6px;
+$emoji-font-size: 50px;
+
+.generated-emoji {
+  font-size: $emoji-font-size;
+  user-select: none;
+
+  position: absolute;
+  left: calc(50% - (#{$emoji-font-size} / 2));
+  top: calc(50% - (#{$emoji-font-size} / 2));
+  z-index: -3;
+}
+
+.emoji-button-container {
+  position: relative;
+  display: inline-block;
+}
+
 .emoji-button {
-  color: red;
+  margin: 10px; // TODO: remove, use only padding
+
+  border: none;
+  background-color: transparent;
+  position: relative;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  > * {
+    position: relative;
+  }
+
+  .circle {
+    color: white;
+    width: $circle-width;
+    height: $circle-height;
+    border-radius: 50%;
+    border: none;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $button-top-color;
+  }
+
+  .pipe {
+    width: 100%;
+    height: $pipe-height;
+    background-color: $button-base-color;
+
+    position: absolute;
+    top: $pipe-height / 2;
+  }
+
+  .pit {
+    background-color: black;
+    width: $circle-width + ($pit-width * 2);
+    height: $circle-height + ($pit-width * 2);
+
+    z-index: -2;
+    position: absolute;
+    bottom: -$pit-width;
+    left: -$pit-width;
+  }
+
+  .base {
+    z-index: -1;
+    background-color: $button-base-color;
+    margin-top: -$circle-height + $pipe-height;
+  }
+
+  &:active {
+    .top {
+      top: $pipe-height / 2;
+    }
+    .pipe {
+      top: $pipe-height;
+      height: $pipe-height / 2;
+    }
+  }
 }

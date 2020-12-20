@@ -13,3 +13,6 @@
 {{ $customStyle := resources.Get . | toCSS $optionsCss | fingerprint }}
 <link rel="stylesheet" href="{{ $customStyle.RelPermalink }}" integrity="{{ $customStyle.Data.Integrity }}">
 {{- end }}
+
+{{ $mainJs := resources.Get "js/main.js" | js.Build "main.js" | minify | fingerprint }}
+<script src="{{ $mainJs.RelPermalink }}" integrity="{{ $mainJs.Data.Integrity }}"></script>

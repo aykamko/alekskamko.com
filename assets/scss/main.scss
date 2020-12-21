@@ -41,6 +41,10 @@ body {
 
   max-width: 1500px;
   margin: auto;
+
+  .body-container {
+    overflow: hidden;
+  }
 }
 
 a {
@@ -72,8 +76,6 @@ a {
     flex-direction: column-reverse;
     padding: (($content-vert-padding / 3) * 2) 0;
   }
-  isolation: isolate; // Necessary for z-index of button to work
-  overflow: hidden;
 
   .section-content {
     margin: 0 auto;
@@ -191,9 +193,15 @@ a {
   pointer-events: none;
 
   position: absolute;
-  bottom: 20px;
-  left: calc(100% - (#{$emoji-font-size}));
-  z-index: -3;
+
+  &.left-shooting {
+    bottom: 20px;
+    left: calc(100% - (#{$emoji-font-size}));
+  }
+  &.up-shooting {
+    bottom: 50%;
+    left: calc(50% - (#{$emoji-font-size} / 2));
+  }
 }
 
 .emoji-button-container {
@@ -214,6 +222,8 @@ a {
   background-color: transparent;
   position: relative;
   padding: 0;
+  isolation: isolate; // Necessary for z-index of button to work
+  z-index: 1;
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   &:focus {

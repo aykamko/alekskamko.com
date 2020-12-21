@@ -34,8 +34,9 @@
       const emojiDiv = document.createElement("div");
       emojiDiv.innerHTML = pickRandomEmoji();
 
+      let animationLenMs;
       if (shootDirection === "RIGHT") {
-        const animationLenMs = 8000;
+        animationLenMs = 8000;
         emojiDiv.className = "generated-emoji left-shooting";
         emojiButtonContainer.appendChild(emojiDiv);
 
@@ -52,7 +53,7 @@
           );
         });
       } else if (shootDirection === "UP") {
-        const animationLenMs = 24000;
+        animationLenMs = 24000;
         emojiDiv.className = "generated-emoji up-shooting";
         emojiButtonContainer.appendChild(emojiDiv);
 

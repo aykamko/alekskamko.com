@@ -27,8 +27,8 @@
     );
 
     const containerHeight = emojiButtonContainer.scrollHeight;
-    const yBuffer = 400;
-    const emojiYSpread = containerHeight + yBuffer * 2;
+    const spreadBuffer = 400;
+    const emojiYSpread = containerHeight + spreadBuffer * 2;
     const emojiButton = document.querySelector(".emoji-button");
 
     const generateShootingEmoji = () => {
@@ -37,7 +37,9 @@
       emojiDiv.innerHTML = pickRandomEmoji();
       emojiButtonContainer.appendChild(emojiDiv);
 
-      const randomYTarget = Math.round(-yBuffer + Math.random() * emojiYSpread);
+      const randomYTarget = Math.round(
+        -spreadBuffer + Math.random() * emojiYSpread
+      );
 
       requestAnimationFrame(() => {
         emojiDiv.setAttribute(
@@ -54,24 +56,31 @@
     let automaticModeStartTimeout;
     let automaticModeInterval;
 
-    emojiButton.addEventListener("mousedown", (ev) => {
-      if (ev.button !== 0) return;
-      generateShootingEmoji();
-
-      clearTimeout(automaticModeStartTimeout);
-      clearInterval(automaticModeInterval);
-
-      automaticModeStartTimeout = setTimeout(() => {
+    const emojiGenerateEvents = ["mousedown", "touchstart"];
+    emojiGenerateEvents.map((evName) => {
+      emojiButton.addEventListener(evName, (ev) => {
+        if (ev.button !== 0) return;
         generateShootingEmoji();
-        automaticModeInterval = setInterval(() => {
+
+        clearTimeout(automaticModeStartTimeout);
+        clearInterval(automaticModeInterval);
+
+        automaticModeStartTimeout = setTimeout(() => {
           generateShootingEmoji();
-        }, 100);
-      }, 1000);
+          automaticModeInterval = setInterval(() => {
+            generateShootingEmoji();
+          }, 100);
+        }, 1000);
+      });
     });
-    document.addEventListener("mouseup", (ev) => {
-      if (ev.button !== 0) return;
-      clearTimeout(automaticModeStartTimeout);
-      clearInterval(automaticModeInterval);
+
+    const emojiStopEvents = ["mouseup", "touchcancel", "touchend"];
+    emojiStopEvents.map((evName) => {
+      document.addEventListener(evName, (ev) => {
+        if (ev.button !== 0) return;
+        clearTimeout(automaticModeStartTimeout);
+        clearInterval(automaticModeInterval);
+      });
     });
   });
 })();

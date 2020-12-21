@@ -19,9 +19,13 @@ $emoji-font-size: 70px;
 $button-text-height: 4;
 
 $body-width: 1450px;
-$content-width: 850px;
+$content-width-full: 850px;
+$content-width-tablet: 768px;
+$content-width-phone: 768px;
 $content-vert-padding: 120px;
-$content-horiz-padding: ($body-width - $content-width) / 2;
+
+$phone-cutoff: 767px;
+$tablet-cutoff: 839px;
 
 body {
   background-color: $body-background;
@@ -29,7 +33,11 @@ body {
 
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 28px;
+
+  @media (max-width: $tablet-cutoff) {
+    font-size: 24px;
+  }
 
   max-width: 1500px;
   margin: auto;
@@ -59,26 +67,72 @@ a {
 
 .section {
   position: relative;
-  padding: $content-vert-padding $content-horiz-padding $content-vert-padding
-    $content-horiz-padding;
-  contain: content; // Necessary for z-index of button to work
+  padding: $content-vert-padding 0;
+  @media (max-width: $phone-cutoff) {
+    flex-direction: column-reverse;
+    padding: (($content-vert-padding / 3) * 2) 0;
+  }
+  isolation: isolate; // Necessary for z-index of button to work
+  overflow: hidden;
+
+  .section-content {
+    margin: 0 auto;
+    max-width: $content-width-full;
+    padding: 0 40px;
+  }
 
   &.one {
     background-color: $section-1;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    .section-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    .salutation {
-      margin-left: 50px;
-      > div {
-        &:nth-child(1) {
-          font-size: 100px;
+      @media (max-width: $phone-cutoff) {
+        flex-direction: column-reverse;
+      }
+
+      .portrait {
+        height: 340px;
+        > svg {
+          height: 100%;
         }
-        &:nth-child(2) {
-          font-size: 50px;
-          padding-left: 4px; // Align text left side
+
+        @media (max-width: $phone-cutoff) {
+          margin-top: 40px;
+        }
+      }
+
+      .salutation {
+        margin-left: 50px;
+        @media (max-width: $phone-cutoff) {
+          margin-left: 0;
+          text-align: center;
+        }
+        > div {
+          &:nth-child(1) {
+            font-size: 100px;
+            @media (max-width: $tablet-cutoff) {
+              font-size: 80px;
+            }
+            @media (max-width: $phone-cutoff) {
+              display: inline-block;
+              font-size: 30px;
+            }
+          }
+          &:nth-child(2) {
+            font-size: 44px;
+            padding-left: 4px; // Align text left side
+            @media (max-width: $tablet-cutoff) {
+              font-size: 36px;
+            }
+            @media (max-width: $phone-cutoff) {
+              display: inline-block;
+              padding-left: 0;
+              font-size: 30px;
+            }
+          }
         }
       }
     }
@@ -88,31 +142,39 @@ a {
     color: $white-text;
     line-height: 1.5em;
 
-    display: flex;
-    justify-content: center;
-    > div {
-      flex: 1 1;
-      text-align: justify;
-      &:not(:first-child) {
-        margin-left: $content-vert-padding;
+    .section-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @media (max-width: $phone-cutoff) {
+        flex-direction: column;
+      }
+      > div {
+        flex: none;
+        text-align: justify;
+
+        width: 350px;
+        @media (max-width: $tablet-cutoff) {
+          width: 310px;
+        }
+
+        &.horiz-spacer {
+          flex: initial;
+          width: 100px;
+          height: 2em;
+        }
       }
     }
   }
   &.three {
-    line-height: 1.5em;
     background-color: $section-3;
+    @media (max-width: $phone-cutoff) {
+      text-align: center;
+    }
   }
   &.four {
-    line-height: 1.5em;
     background-color: $section-4;
-  }
-}
-
-.portrait {
-  width: 340px;
-  height: 340px;
-  > svg {
-    height: 100%;
   }
 }
 
@@ -120,7 +182,13 @@ a {
 
 .generated-emoji {
   font-size: $emoji-font-size;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
+  pointer-events: none;
 
   position: absolute;
   bottom: 20px;
@@ -131,6 +199,14 @@ a {
 .emoji-button-container {
   position: relative;
   display: inline-block;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .emoji-button {
@@ -139,6 +215,7 @@ a {
   position: relative;
   padding: 0;
 
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   &:focus {
     outline: none;
   }

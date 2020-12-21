@@ -11,13 +11,13 @@ fi
 hugo -D
 
 temp_dir=$(mktemp -d)
-trap "rm -f $temp_dir" EXIT
+trap "rm -rf $temp_dir" EXIT
 
 cp -R "$SCRIPT_DIR/public" "$temp_dir"
 git checkout publish
-cp -R "$temp_dir/public/*" .
+cp -R "$temp_dir"/public/* .
 git add -A .
 git commit -m "Site published at $(date)"
-git push
+git push -u origin publish
 
 git checkout -

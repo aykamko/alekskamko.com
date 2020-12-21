@@ -222,7 +222,7 @@ a {
   background-color: transparent;
   position: relative;
   padding: 0;
-  isolation: isolate; // Necessary for z-index of button to work
+  isolation: isolate; // Necessary for z-indexing of child elements to work
   z-index: 1;
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

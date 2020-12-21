@@ -1,3 +1,5 @@
 baseURL = "http://alekskamko.com/"
 languageCode = "en-us"
 title = "Aleks Kamko"
+author = "Aleks Kamko"
+googleAnalytics = "UA-40422523-1"

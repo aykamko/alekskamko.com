@@ -3,22 +3,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {{/*
-  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <title>{{ .Site.Title }}</title>
+  <meta name="description" content="I'm a software engineer building a piece of the future at Mighty. I enjoy system design, great user experiences, and remote work culture.">
+  <link rel="canonical" href="{{ .Site.BaseURL }}" />
 
-  <!-- Facebook Open Graph -->
-  <meta property="og:title" content="Aleks Kamko">
-  <meta property="og:site_name" content="Aleks Kamko">
-  <meta property="og:image" content="{{ "/static/img/portrait.jpg" | prepend: site.url }}">
-  <meta property="og:description" content="{{ site.description }}">
-  <meta property="og:type" content="website">
-
-  <!-- Facicons and Apple -->
-  <link rel="apple-touch-icon-precomposed" href="{{ "static/ico/apple-touch-icon-precomposed.png" | prepend: site.baseurl }}">
-  <link rel="shortcut icon" href="{{ "static/ico/favicon.png" | prepend: site.baseurl }}">
-  */}}
+  <link rel="shortcut icon" href="/favicon-32.png">
 
   {{ $resetCss := resources.Get "scss/reset.scss" | toCSS (dict "outputStyle" "compressed") | fingerprint }}
   <link rel="stylesheet" href="{{ $resetCss.RelPermalink }}" integrity="{{ $resetCss.Data.Integrity }}">
@@ -32,6 +21,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap" rel="stylesheet">
+
+  {{ template "_internal/google_analytics_async.html" . }}
 </head>
 
 <body>

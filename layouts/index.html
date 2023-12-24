@@ -10,13 +10,13 @@
   <link rel="shortcut icon" href="/favicon-32.png">
 
   {{ $resetCss := resources.Get "scss/reset.scss" | toCSS (dict "outputStyle" "compressed") | fingerprint }}
-  <link rel="stylesheet" href="{{ $resetCss.RelPermalink }}" integrity="{{ $resetCss.Data.Integrity }}">
+  <link rel="stylesheet" href="{{ strings.TrimLeft "/" $resetCss.RelPermalink }}" integrity="{{ $resetCss.Data.Integrity }}">
 
   {{ $mainCss := resources.Get "scss/main.scss" | toCSS (dict "outputStyle" "compressed") | fingerprint }}
-  <link rel="stylesheet" href="{{ $mainCss.RelPermalink }}" integrity="{{ $mainCss.Data.Integrity }}">
+  <link rel="stylesheet" href="{{ strings.TrimLeft "/" $mainCss.RelPermalink }}" integrity="{{ $mainCss.Data.Integrity }}">
 
   {{ $mainJs := resources.Get "js/main.js" | js.Build "main.js" | minify | fingerprint }}
-  <script src="{{ $mainJs.RelPermalink }}" integrity="{{ $mainJs.Data.Integrity }}"></script>
+  <script src="{{ strings.TrimLeft "/" $mainJs.RelPermalink }}" integrity="{{ $mainJs.Data.Integrity }}"></script>
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
@@ -45,7 +45,7 @@
       </div>
       <div class="horiz-spacer"></div>
       <div>
-        These days, I’m building a piece of the future at 
+        These days, I’m building a piece of the future at
         <a target="_blank" href="https://mightyapp.com/">Mighty</a>.
          Previously, I’ve been at CrowdAI, Stripe, Twitch, Facebook, and UC
          Berkeley

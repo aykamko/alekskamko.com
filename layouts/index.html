@@ -7,7 +7,7 @@
   <meta name="description" content="I'm a software engineer building a piece of the future at Mighty. I enjoy system design, great user experiences, and remote work culture.">
   <link rel="canonical" href="{{ .Site.BaseURL }}" />
 
-  <link rel="shortcut icon" href="/favicon-32.png">
+  <link rel="shortcut icon" href="favicon-32.png">
 
   {{ $resetCss := resources.Get "scss/reset.scss" | toCSS (dict "outputStyle" "compressed") | fingerprint }}
   <link rel="stylesheet" href="{{ strings.TrimLeft "/" $resetCss.RelPermalink }}" integrity="{{ $resetCss.Data.Integrity }}">
